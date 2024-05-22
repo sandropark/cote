@@ -4,32 +4,28 @@
 
 # 1. 그래프 만들기 - 인접 행렬, 인접 리스트
 
-from typing import Deque
+from collections import deque
 
+vertex, edge, target_count, start_vertex = map(int, input().split())
 
-vertex, edge, target_count, start_vertex = 4,4,2,1
+graph = [[] for _ in range(vertex + 1)]
+for _ in range(edge):
+    f, t = map(int, input().split())
+    graph[f].append(t)
 
-raw_graph = [(1,2), (1,3), (2,3), (2,4)]
+# graph = [[], [2,3], [3,4], [],[]]
 
-graph = {1:[2, 3], 2:[3, 4]}
-visited = [0] * (vertex + 1)
-result = []
-queue = Deque()
+distance = [-1] * (vertex + 1)
+distance[start_vertex] = 0
 
-def bfs(start_vertex):
-    queue.append(start_vertex)
-    visited[start_vertex] = 1
-    for temp in graph[start_vertex]:
-        queue.append(temp)
+queue = deque([start_vertex])
 
-    while len(queue):
-        poped_vertex = queue.popleft()
-        if not visited[poped_vertex]:
-            visited[poped_vertex] = 1
-            for temp in graph[poped_vertex]:
-                queue.append(temp)
-    
-        
-bfs(start_vertex)
+while queue:
+    temp_verxex = queue.popleft()
+    for neighbor in graph[temp_verxex]:
+        if distance[neighbor] == -1:
+            distance[neighbor] = distance[temp_verxex] + 1
+            queue.append(neighbor)
 
-
+result = [i for i, v in enumerate(distance) if v == target_count]
+print(result)
