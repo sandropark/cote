@@ -74,7 +74,7 @@ class QuickTest(unittest.TestCase):
       arr = [3,4,2,8,5,9,0,1,6,7]
             
       # when
-      quick.sort(arr)
+      quick.sort(arr, end=len(arr)-1)
     
       # then
       self.assertEqual(arr, [0,1,2,3,4,5,6,7,8,9])
