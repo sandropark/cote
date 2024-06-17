@@ -20,17 +20,16 @@ def sort(arr:list, end:int, start:int=0):
     right_idx = end
     if start >= end: return
     
-    left_idx = find_left_idx(arr, pivot_idx, left_idx, end)
     right_idx = find_right_idx(arr, pivot_idx, right_idx, start)
-    
     if right_idx == start: return
+    left_idx = find_left_idx(arr, pivot_idx, left_idx, end)
     
     if is_crossed(left_idx, right_idx):
         swap(arr, pivot_idx, right_idx)
         # 왼쪽
         sort(arr, end=right_idx-1)
         # 오른쪽
-        sort(arr, start=right_idx+1, end=len(arr)-1)
+        sort(arr, start=right_idx+1, end=end)
     else :
         swap(arr, left_idx, right_idx)
         sort(arr, start=start, end=end)
