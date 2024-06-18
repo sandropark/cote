@@ -12,7 +12,7 @@ def my_input(size:int = random.randint(1, 500)) -> list:
 def print_input(arr:list):
     print(f"input_size={len(arr)}, min={min(arr)}, max={max(arr)}")
 
-input_list : list = my_input(3)
+input_list : list = my_input()
 class 위에서_아래로(unittest.TestCase):
     def test_select_sort(self):
         # given
@@ -48,7 +48,7 @@ class 위에서_아래로(unittest.TestCase):
         # given
     
         # when
-        result : list = Sort.quick_sort(deepcopy(input_list))
+        result : list = Sort.quick_sort(deepcopy(input_list), end=len(input_list)-1)
         expected : list = sorted(input_list, reverse=True)
     
         # then

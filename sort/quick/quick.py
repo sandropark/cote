@@ -18,10 +18,10 @@ def is_crossed(left_idx:int, right_idx:int) -> bool:
 
 def sort(arr:list, start:int=0, end:int=-10):
     if end == -10: end = len(arr)-1
+    if start >= end: return
     pivot_idx = start
     left_idx = start+1
     right_idx = end
-    if start >= end: return
     
     right_idx = find_right_idx(arr, pivot_idx, right_idx, start)
     left_idx = find_left_idx(arr, pivot_idx, left_idx, end)
@@ -35,6 +35,25 @@ def sort(arr:list, start:int=0, end:int=-10):
     else :
         swap(arr, left_idx, right_idx)
         sort(arr, start=start, end=end)
+        
+def quick_sort(arr:list, end:int, start:int=0):
+    if start >= end: return
+    pivot_idx = start
+    left_idx = start+1
+    right_idx = end
+
+    while left_idx <= right_idx:
+        while left_idx <= end and arr[left_idx] < arr[pivot_idx]:
+            left_idx+=1
+        while right_idx > start and arr[right_idx] > arr[pivot_idx]:
+            right_idx-=1
+        if is_crossed(left_idx, right_idx):
+            swap(arr, pivot_idx, right_idx)
+        else:
+            swap(arr, left_idx, right_idx)
+
+    quick_sort(arr, end=right_idx-1)
+    quick_sort(arr, start=right_idx+1, end=end)
         
 def sort_reverse(arr:list, start:int=0, end:int=-10):
     if end == -10: end = len(arr)-1

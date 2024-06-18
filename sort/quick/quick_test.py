@@ -1,5 +1,10 @@
+import random
 import unittest
 import quick
+
+def my_input(size:int = random.randint(1, 500)) -> list:
+    # return [random.randint(1, 100) for _ in range(size)]
+    return [random.randint(1, 100000) for _ in range(size)]
 
 class QuickTest(unittest.TestCase):
     # 피벗보다 큰 수의 인덱스를 찾는다.
@@ -78,7 +83,7 @@ class QuickTest(unittest.TestCase):
     
       # then
       self.assertEqual(arr, [0,1,2,3,4,5,6,7,8,9])
-      
+
     def test_sort_reverse(self):
         # given
         arr = [3,4,2,8,5,9,0,1,6,7]
@@ -88,7 +93,17 @@ class QuickTest(unittest.TestCase):
     
         # then
         self.assertEqual(arr, [9,8,7,6,5,4,3,2,1,0])
+    
+    def test_quick(self):
+        # given
+        input_list = my_input()
+        expected = sorted(input_list)
 
+        # when
+        quick.quick_sort(input_list, len(input_list)-1)
+
+        # then
+        self.assertEqual(input_list, expected)
 
 if __name__ == '__main__':
     unittest.main()
