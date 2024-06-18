@@ -26,28 +26,24 @@ class Sort:
                         break
         return arr
 
-    def quick_sort(arr:list, end:int, start:int=0) -> list:
-        if start >= end: return
-        pivot_idx, left_idx, right_idx = start, start+1, end
+    # def quick_sort(arr:list, end:int, start:int=0) -> list:
+    #     if start >= end: return
+    #     pivot_idx, left_idx, right_idx = start, start+1, end
         
-        while left_idx <= right_idx:
-            # left 피벗보다 작은 수를 찾기
-            while left_idx <= end and arr[left_idx] <= arr[pivot_idx]:
-                left_idx+=1
-            # right 피벗보다 큰 수를 찾기
-            while right_idx > start and arr[right_idx] >= arr[pivot_idx]:
-                right_idx-=1
-            if Sort.__is_crossed__(left_idx, right_idx):
-                Sort.__swap__(arr, pivot_idx, right_idx)
-            else :
-                Sort.__swap__(arr, left_idx, right_idx)
+    #     while left_idx <= right_idx:
+    #         while left_idx <= end and arr[left_idx] >= arr[pivot_idx]:
+    #             left_idx+=1
+    #         while right_idx > start and arr[right_idx] <= arr[pivot_idx]:
+    #             right_idx-=1
+    #         if Sort.__is_crossed__(left_idx, right_idx):
+    #             Sort.__swap__(arr, pivot_idx, right_idx)
+    #         else :
+    #             Sort.__swap__(arr, left_idx, right_idx)
                         
-        # 왼쪽
-        Sort.quick_sort(arr, end=right_idx-1)
-        # 오른쪽
-        Sort.quick_sort(arr, start=right_idx+1, end=end)
-        
-        return arr
+    #     Sort.quick_sort(arr, end=right_idx-1)
+    #     Sort.quick_sort(arr, start=right_idx+1, end=end)
+
+    #     return arr
 
     def __swap__(arr:list, i1:int, i2:int):
         arr[i1], arr[i2] = arr[i2], arr[i1]

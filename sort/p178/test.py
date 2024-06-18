@@ -13,6 +13,7 @@ def print_input(arr:list):
     print(f"input_size={len(arr)}, min={min(arr)}, max={max(arr)}")
 
 input_list : list = my_input()
+
 class 위에서_아래로(unittest.TestCase):
     def test_select_sort(self):
         # given
@@ -44,14 +45,14 @@ class 위에서_아래로(unittest.TestCase):
         # then
         self.assertEqual(expected, result)
         
-    def test_quick_sort(self):
-        # given
+    # def test_quick_sort(self):
+    #     # given
     
-        # when
-        result : list = Sort.quick_sort(deepcopy(input_list), end=len(input_list)-1)
-        expected : list = sorted(input_list, reverse=True)
+    #     # when
+    #     result = Sort.quick_sort(deepcopy(input_list), end=len(input_list)-1)
+    #     expected : list = sorted(input_list, reverse=True)
     
-        # then
-        self.assertEqual(expected, result)
+    #     # then
+    #     self.assertEqual(expected, result)
 
 unittest.main()
