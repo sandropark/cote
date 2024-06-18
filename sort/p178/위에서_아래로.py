@@ -17,12 +17,12 @@ class Sort:
             temp = arr[i]
             # 가장 앞 요소보다 작으면, 가장 앞으로 보낸다.
             if temp > arr[0]:
-                arr.insert(0, arr.pop(i))
+                arr[0], arr[i] = arr[i], arr[0]
             else:
                 # 0부터 i까지 순회하면서 temp보다 큰 값이 있는 경우 그 앞에 넣는다.
                 for j in range(1, i):
                     if temp > arr[j]:
-                        arr.insert(j, arr.pop(i))
+                        arr[j], arr[i] = arr[i], arr[j]
                         break
         return arr
 
@@ -68,6 +68,6 @@ class Sort:
 
         # 카운팅한 배열을 거꾸로 순회하면서 실제 값으로 변경
         return [item 
-                for i in range(len(new_list) - 1, -1, -1)
+                for i in range(len(new_list)-1, -1, -1)
                 if new_list[i] != 0 
                 for item in [i] * new_list[i]]
