@@ -14,7 +14,7 @@ def swap(arr:list, i1:int, i2:int):
     arr[i1], arr[i2] = arr[i2], arr[i1]
     
 def is_crossed(left_idx:int, right_idx:int) -> bool:
-    return left_idx >= right_idx
+    return left_idx > right_idx
 
 def sort(arr:list, start:int=0, end:int=-10):
     if end == -10: end = len(arr)-1
@@ -36,45 +36,17 @@ def sort(arr:list, start:int=0, end:int=-10):
         swap(arr, left_idx, right_idx)
         sort(arr, start=start, end=end)
         
-def quick_sort(arr:list, end:int, start:int=0):
-    if start >= end: return
-    pivot_idx = start
-    left_idx = start+1
-    right_idx = end
-
-    while left_idx <= right_idx:
-        while left_idx <= end and arr[left_idx] < arr[pivot_idx]:
-            left_idx+=1
-        while right_idx > start and arr[right_idx] > arr[pivot_idx]:
-            right_idx-=1
-        if is_crossed(left_idx, right_idx):
-            swap(arr, pivot_idx, right_idx)
-        else:
-            swap(arr, left_idx, right_idx)
-
-    quick_sort(arr, end=right_idx-1)
-    quick_sort(arr, start=right_idx+1, end=end)
-        
-def sort_reverse(arr:list, start:int=0, end:int=-10):
-    if end == -10: end = len(arr)-1
-    pivot_idx = start
-    left_idx = start+1
-    right_idx = end
-    if start >= end: return
+def quick_sort(arr:list, reverse:bool=False):
+    if len(arr) <= 1:
+        return arr
     
-    # left 피벗보다 작은 수를 찾기
-    while arr[left_idx] > arr[pivot_idx] and left_idx < end:
-        left_idx+=1
-    # right 피벗보다 큰 수를 찾기
-    while arr[right_idx] < arr[pivot_idx] and right_idx > start:
-        right_idx-=1
-        
-    if is_crossed(left_idx, right_idx):
-        swap(arr, pivot_idx, right_idx)
-        # 왼쪽
-        sort_reverse(arr, end=right_idx-1)
-        # 오른쪽
-        sort_reverse(arr, start=right_idx+1, end=end)
-    else :
-        swap(arr, left_idx, right_idx)
-        sort_reverse(arr, start=start, end=end)
+    pivot = arr[0]
+    tail = arr[1:]
+    
+    left_side = [x for x in tail if __condition__(x, pivot, reverse)]
+    right_side = [x for x in tail if __condition__(x, pivot, not reverse)]
+
+    return quick_sort(left_side, reverse) + [pivot] + quick_sort(right_side, reverse)
+
+def __condition__(x:int, pivot:int, reverse:bool=False):
+    return x > pivot if reverse else x <= pivot
