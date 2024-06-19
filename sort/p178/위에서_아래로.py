@@ -15,7 +15,7 @@ class Sort:
     def insertion_sort(arr:list) -> list:
         for i in range(1, len(arr)):
             temp = arr[i]
-            # 가장 앞 요소보다 작으면, 가장 앞으로 보낸다.
+            # 가장 앞 요소보다 크면, 가장 앞으로 보낸다.
             if temp > arr[0]:
                 arr.insert(0, arr.pop(i))
             else:
