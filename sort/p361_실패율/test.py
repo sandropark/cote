@@ -1,3 +1,3 @@
-a = {1: 0.5, 2: 0.8}
+arr = [1,2,3]
 
-print(a.items())
+print(sorted(enumerate(arr), key=lambda x: (-x[1], x[0])))
