@@ -43,7 +43,7 @@ def solution(arr:list) -> int:
 def quick_sort(arr:list, reverse:bool=False):
     if len(arr) <= 1:
         return arr
-    
+
     pivot = arr[0]
     tail = arr[1:]
     
