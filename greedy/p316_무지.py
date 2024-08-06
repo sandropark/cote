@@ -24,15 +24,21 @@ class Test(unittest.TestCase):
         self.assertEqual(result, -1)
 
 def solution(food_times:list, k):
-    total_times = sum(food_times)
-    if total_times <= k:
+    if sum(food_times) <= k:
         return -1
     max_num = max(food_times)
-    result_arr:list = [[] * max_num for _ in range(max_num)]
+    result_arr:list = [[] for _ in range(max_num)]
     for i, v in enumerate(food_times):
-        for j in range(0, v):
-            result_arr[j].append(i)
+        result_arr[i] = [i] * v
+    result_arr = transposition(result_arr)
     return sum(result_arr, [])[k] + 1
+
+def transposition(arr:list) -> list:
+    transformed_list =[[] for _ in arr]
+    for inner in arr:
+        for j, e in enumerate(inner):
+            transformed_list[j].append(e)
+    return transformed_list
 
 if __name__ == '__main__':
     unittest.main()
