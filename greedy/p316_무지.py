@@ -23,10 +23,21 @@ class Test(unittest.TestCase):
         # then
         self.assertEqual(result, -1)
 
+    def test_2(self):
+        # given
+        food_times = [3,1,1,1,2,4,3]
+        k = 12
+
+        # when
+        result = solution(food_times, k)
+
+        # then
+        self.assertEqual(result, 6)
+
 def solution(food_times:list, k):
     if sum(food_times) <= k:
         return -1
-    max_num = max(food_times)
+    max_num = max(max(food_times), len(food_times))
     result_arr:list = [[] for _ in range(max_num)]
     for i, v in enumerate(food_times):
         result_arr[i] = [i] * v
