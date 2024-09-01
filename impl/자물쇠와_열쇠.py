@@ -13,18 +13,34 @@ class Test(unittest.TestCase):
         # then
         self.assertTrue(result)
     
-    def test_test(self):
-        ud = [(0,1), (0,2), (0,-1), (0,-2)]
-        lr = [(-1,0), (-2,0) , (1,0), (2,0)]
-        for i in ud:
-            for j in lr:
-                print(i, j)
-
-def solution(key : list, lock : list) -> bool:
-    # 1. 이동
+def solution(key : list, lock : list) -> bool:   
+    hole_count = get_hole_count(lock)
+    n = len(lock[0])
+    m = len(key[0])
     
+    conflict_cnt = 0
+    match_cnt = 0
+    
+    for i in range(n):
+        inner_lock = lock[i]
+        inner_key = key[i]
+        for j in range(n):
+            temp_lock = inner_lock[j]
+            temp_key = inner_key[j]
+            if temp_lock == 0 and temp_key == 1:
+                match_cnt =+ 1
+            elif temp_lock == 1 and temp_key == 1:
+                conflict_cnt =+ 1
 
-    pass
+    return conflict_cnt == 0 and hole_count == match_cnt
+
+def get_hole_count(lock) -> int:
+    hole_count = 0
+    for row in lock:
+        for e in row:
+            if e == 0:
+                hole_count += 1
+    return hole_count
 
 
 if __name__ == '__main__':
